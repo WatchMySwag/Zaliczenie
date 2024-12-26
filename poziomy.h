@@ -1,8 +1,7 @@
-//
-// Created by Maciej on 26.12.2024.
-//
 
 #ifndef POZIOMY_H
 #define POZIOMY_H
-
-#endif //POZIOMY_H
+void tworzenie_tab(int x, int y);
+void miny(int size, int size2, int miny, int wybrane_x, int wybrane_y);
+void flaga(int x, int y);
+#endif
