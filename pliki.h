@@ -3,6 +3,7 @@
 
 
 void tworzenie();
-
+void update(char s[], int rating);
+void wypisz();
 #endif  
 

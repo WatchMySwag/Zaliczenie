@@ -1,14 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <time.h>
 #include "pliki.h"
-
+#include "poziomy.h"
+#include <string.h>
 int main(int argc, char *argv[]) {
     FILE *file = fopen("wyniki.txt", "r");
     if(file == NULL) {
         tworzenie();
     }
     fclose(file);
+    srand(time(NULL));
     int opt;
     int poziom = 0;
     while ((opt = getopt(argc, argv, "l:")) != -1) {
@@ -34,17 +37,89 @@ int main(int argc, char *argv[]) {
 
     switch (poziom) {
         case 1:
-            printf("Wybrales poziom latwy.\n");
+            printf("Wybrano poziom latwy.\n");
             break;
         case 2:
-            printf("Wybrales poziom sredni.\n");
+            printf("Wybrano poziom sredni.\n");
             break;
         case 3:
-            printf("Wybrales poziom trudny.\n");
+            printf("Wybrano poziom trudny.\n");
             break;
     }
-   update("Jason",12);
-   update("Mario",6);
+    if(poziom == 1) {
+        int x = 9;
+        mines = (char **)malloc(x * sizeof(char *));
+        board = (char **)malloc(x * sizeof(char *));
+        for (int i = 0; i < x; i++) {
+            mines[i] = (char *)malloc(x * sizeof(char));
+            board[i] = (char *)malloc(x * sizeof(char));
+        }
+        int wynik = gra(x,x,10);
+        char s[51];
+        while (1) {
+            printf("Twoj wynik to: %d\nPodaj swoja nazwe: \n",wynik);
+            scanf("%50s", s); //ograniczenie dla stringa - ciekawa opcja
+            if (strlen(s) == 0) {
+                printf("Nazwa nie moze byc pusta! Podaj ponownie: \n");
+            } else if (strlen(s) > 50) {
+                printf("Nazwa nie moze byc dluzsza niz 50 znakow! Podaj ponownie: \n");
+            } else {
+                break;
+            }
+        }
+        update(s,wynik);
+        wypisz();
+    }
+    if(poziom == 2) {
+        int x = 16;
+        mines = (char **)malloc(x * sizeof(char *));
+        board = (char **)malloc(x * sizeof(char *));
+        for (int i = 0; i < x; i++) {
+            mines[i] = (char *)malloc(x * sizeof(char));
+            board[i] = (char *)malloc(x * sizeof(char));
+        }
+        int wynik = gra(x,x,40);
+        char s[51];
+        wynik*=2;
+        while (1) {
+            printf("Twoj wynik to: %d\nPodaj swoja nazwe: \n",wynik);
+            scanf("%50s", s); //ograniczenie dla stringa - ciekawa opcja
+            if (strlen(s) == 0) {
+                printf("Nazwa nie moze byc pusta! Podaj ponownie: \n");
+            } else if (strlen(s) > 50) {
+                printf("Nazwa nie moze byc dluzsza niz 50 znakow! Podaj ponownie: \n");
+            } else {
+                break;
+            }
+        }
+        update(s,wynik);
+        wypisz();
+    }
+    if(poziom == 3) {
+        int x = 16,y=30;
+        mines = (char **)malloc(16 * sizeof(char *));
+        board = (char **)malloc(16 * sizeof(char *));
+        for (int i = 0; i < x; i++) {
+            mines[i] = (char *)malloc(30 * sizeof(char));
+            board[i] = (char *)malloc(30 * sizeof(char));
+        }
+        int wynik = gra(x,y,99);
+        wynik*=3;
+        char s[51];
+        while (1) {
+            printf("Twoj wynik to: %d\nPodaj swoja nazwe: \n",wynik);
+            scanf("%50s", s); //ograniczenie dla stringa - ciekawa opcja
+            if (strlen(s) == 0) {
+                printf("Nazwa nie moze byc pusta! Podaj ponownie: \n");
+            } else if (strlen(s) > 50) {
+                printf("Nazwa nie moze byc dluzsza niz 50 znakow! Podaj ponownie: \n");
+            } else {
+                break;
+            }
+        }
+        update(s,wynik);
+        wypisz();
+    }
     return 0;
 }
 

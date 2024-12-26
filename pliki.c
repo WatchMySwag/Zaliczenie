@@ -45,3 +45,16 @@ void update(char s[], int rating) {
     remove("wyniki.txt");  // usuwanie pliku obecnego
     rename("temp.txt", "wyniki.txt");//zamiana nazwy
 }
+void wypisz() {
+    FILE *file = fopen("wyniki.txt","r");
+    Gracz gracze[top];
+    int i=0;
+    while (fscanf(file, "%d %s %d", &gracze[i].nr, &gracze[i].nazwa, &gracze[i].wynik) != EOF) {
+        i++;
+    }
+    printf("    LEADERBOARD\n");
+    for(int i=0;i<top;i++) {
+        printf("%d   %s   %d\n",gracze[i].nr,gracze[i].nazwa,gracze[i].wynik);
+    }
+    fclose(file);
+}
