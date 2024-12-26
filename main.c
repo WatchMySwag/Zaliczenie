@@ -4,10 +4,13 @@
 #include "pliki.h"
 
 int main(int argc, char *argv[]) {
+    FILE *file = fopen("wyniki.txt", "r");
+    if(file == NULL) {
+        tworzenie();
+    }
+    fclose(file);
     int opt;
     int poziom = 0;
-
-    // Obsługuje opcje za pomocą getopt
     while ((opt = getopt(argc, argv, "l:")) != -1) {
         switch (opt) {
             case 'l':
@@ -29,7 +32,6 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    // Wypisuje odpowiedni komunikat w zależności od poziomu trudności
     switch (poziom) {
         case 1:
             printf("Wybrales poziom latwy.\n");
@@ -41,6 +43,8 @@ int main(int argc, char *argv[]) {
             printf("Wybrales poziom trudny.\n");
             break;
     }
+   update("Jason",12);
+   update("Mario",6);
     return 0;
 }
 
