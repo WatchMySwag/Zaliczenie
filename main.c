@@ -56,9 +56,11 @@ int main(int argc, char *argv[]) {
         }
         int wynik = gra(x,x,10);
         char s[51];
+        if(wynik!=0) {
             printf("Twoj wynik to: %d\nPodaj swoja nazwe skladajaca sie maksymalnie z 50 znakow: \n",wynik);
             scanf("%50s", s); //ograniczenie dla stringa - ciekawa opcja
             update(s,wynik);
+        }
             wypisz();
     }
     if(poziom == 2) {
@@ -72,9 +74,11 @@ int main(int argc, char *argv[]) {
         int wynik = gra(x,x,40);
         char s[51];
         wynik*=2;
-        printf("Twoj wynik to: %d\nPodaj swoja nazwe skladajaca sie maksymalnie z 50 znakow: \n",wynik);
-        scanf("%50s", s); //ograniczenie dla stringa - ciekawa opcja
-        update(s,wynik);
+        if(wynik!=0) {
+            printf("Twoj wynik to: %d\nPodaj swoja nazwe skladajaca sie maksymalnie z 50 znakow: \n",wynik);
+            scanf("%50s", s); //ograniczenie dla stringa - ciekawa opcja
+            update(s,wynik);
+        }
         wypisz();
     }
     if(poziom == 3) {
@@ -88,9 +92,11 @@ int main(int argc, char *argv[]) {
         int wynik = gra(x,y,99);
         wynik*=3;
         char s[51];
-        printf("Twoj wynik to: %d\nPodaj swoja nazwe skladajaca sie maksymalnie z 50 znakow: \n",wynik);
-        scanf("%50s", s); //ograniczenie dla stringa - ciekawa opcja
-        update(s,wynik);
+        if(wynik!=0) {
+            printf("Twoj wynik to: %d\nPodaj swoja nazwe skladajaca sie maksymalnie z 50 znakow: \n",wynik);
+            scanf("%50s", s); //ograniczenie dla stringa - ciekawa opcja
+            update(s,wynik);
+        }
         wypisz();
     }
     return 0;

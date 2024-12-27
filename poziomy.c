@@ -20,7 +20,7 @@ void miny(int size, int size2, int miny, int wybrane_x, int wybrane_y) {
     while (plant != miny) {
         int x = rand() % size;
         int y = rand() % size2;
-        if (!(x == wybrane_x && y == wybrane_y)) {
+        if (!(x == wybrane_x && y == wybrane_y) && mines[x][y]!='*') {
             mines[x][y] = '*';
             for (int dx = -1; dx <= 1; dx++) {
                 for (int dy = -1; dy <= 1; dy++) {
