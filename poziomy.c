@@ -20,28 +20,21 @@ void miny(int size, int size2, int miny, int wybrane_x, int wybrane_y) {
     while (plant != miny) {
         int x = rand() % size;
         int y = rand() % size2;
-
-        // Umieszczamy minę wszędzie, z wyjątkiem wybranej komórki (wybrane_x, wybrane_y)
         if (!(x == wybrane_x && y == wybrane_y)) {
-            mines[x][y] = '*';  // Umieszczamy minę
-
-            // Zaktualizuj otaczające komórki
+            mines[x][y] = '*';
             for (int dx = -1; dx <= 1; dx++) {
                 for (int dy = -1; dy <= 1; dy++) {
                     int nx = x + dx;
                     int ny = y + dy;
                     if (nx >= 0 && ny >= 0 && nx < size && ny < size2 && mines[nx][ny] != '*') {
-                        mines[nx][ny]++;  // Zwiększamy liczbę min wokół tej komórki
+                        mines[nx][ny]++;
                     }
                 }
             }
-            plant++;  // Zwiększamy liczbę umieszczonych min
+            plant++;
         }
     }
 }
-
-
-
 
 void flaga(int x, int y) {
     if (board[x][y] == '-') board[x][y] = 'F'; // dodaj
@@ -121,7 +114,7 @@ int gra(int sizex, int sizey, int mines_count) {
         }
     }
     miny(sizex, sizey, mines_count, x, y);
-   wypisz_miny(sizex, sizey);
+   //wypisz_miny(sizex, sizey);
 
     odkrywanie(sizex, sizey, x, y);
 
@@ -141,7 +134,7 @@ int gra(int sizex, int sizey, int mines_count) {
             wynik = odkryte_pola;
             break;
         }
-        printf("Wybierz akcje: (1) Odkryj pole (2) Postaw flage (0) Zakoncz gre\n");
+        printf("Wybierz akcje: (1) Odkryj pole (2) Postaw flage/Odznacz flage (0) Zakoncz gre\n");
         scanf(" %c", &command);
 
         if (command == '0') {
