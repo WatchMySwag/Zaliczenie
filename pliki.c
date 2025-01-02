@@ -19,7 +19,7 @@ void update(char s[], int rating) {
     FILE *po = fopen("temp.txt", "w");
     Gracz gracze[top];
     int i=0;
-    while (fscanf(przed, "%d %s %d", &gracze[i].nr, &gracze[i].nazwa, &gracze[i].wynik) != EOF) {
+    while (fscanf(przed, "%d %s %d", &gracze[i].nr, gracze[i].nazwa, &gracze[i].wynik) != EOF) {
         i++;
     }
     if(rating > gracze[top-1].wynik) {
@@ -49,7 +49,7 @@ void wypisz() {
     FILE *file = fopen("wyniki.txt","r");
     Gracz gracze[top];
     int i=0;
-    while (fscanf(file, "%d %s %d", &gracze[i].nr, &gracze[i].nazwa, &gracze[i].wynik) != EOF) {
+    while (fscanf(file, "%d %s %d", &gracze[i].nr, gracze[i].nazwa, &gracze[i].wynik) != EOF) {
         i++;
     }
     printf("    LEADERBOARD\n");
