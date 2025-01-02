@@ -5,6 +5,7 @@
 #include "pliki.h"
 #include "poziomy.h"
 #include <string.h>
+#include <getopt.h>
 int main(int argc, char *argv[]) {
     FILE *file = fopen("wyniki.txt", "r");
     if(file == NULL) {
