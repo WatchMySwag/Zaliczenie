@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
         switch (opt) {
             case 'l':
                 poziom = atoi(optarg);
-                if (poziom < 1 || poziom > 3) {
+                if (poziom < 1 || poziom > 4) {
                     printf("Blad: Poziom trudnosci musi byc od 1 do 3.\n");
                     return 1;
                 }
@@ -30,8 +30,8 @@ int main(int argc, char *argv[]) {
     }
 
     if (poziom == 0) {
-        printf("Uzycie: %s -l [1-3]\n", argv[0]);
-        printf("  -l  Wybor poziomu trudnosci (1: latwy, 2: sredni, 3: trudny)\n");
+        printf("Uzycie: %s -l [1-4]\n", argv[0]);
+        printf("  -l  Wybor poziomu trudnosci (1: latwy, 2: sredni, 3: trudny, 4: wlasna mapa)\n");
         return 1;
     }
 
@@ -45,6 +45,8 @@ int main(int argc, char *argv[]) {
         case 3:
             printf("Wybrano poziom trudny.\n");
             break;
+        case 4:
+            printf("Wybrano wlasna mape.\n");
     }
     if(poziom == 1) {
         int x = 9;
@@ -98,6 +100,36 @@ int main(int argc, char *argv[]) {
             update(s,wynik);
         }
         wypisz();
+    }
+    if (poziom == 4) {
+        //dokonczyc warunek ilosci min
+        int a,b;
+        int minty;
+        while(1) {
+            printf("Podaj wymiary planszy a x b:\na = ");
+            scanf("%d",&a);
+            printf("b = ");
+            scanf("%d",&b);
+            printf("Podaj ilosc min: ");
+            scanf("%d", &minty);
+            if(minty<=0 || a <=0 || b<=0) {
+                printf("Jedna z podanych warosci jest ujemna,badz rowna 0, podaj wartosci jeszcze raz!\n");
+            }
+            else if(minty >= a*b) {
+                printf("Ilosc min musi byc mniejsza niz wymiary planszy, twoj obecny wymiar planszy ma wartosc %d\n", a*b);
+            }
+            else {
+                break;
+            }
+        }
+        mines = (char **)malloc(a * sizeof(char *));
+        board = (char **)malloc(a * sizeof(char *));
+        for (int i = 0; i < a; i++) {
+            mines[i] = (char *)malloc(b * sizeof(char));
+            board[i] = (char *)malloc(b * sizeof(char));
+        }
+       int wynik = gra(a,b,minty);
+        printf("Twoj wynik: %d\n Customowe gry nie wliczaja sie do rankingu. Natomiast jesli chcesz walczyc z najlepszymi rozpocznij gre jeszcze raz i wybierz poziom trudnosci od 1-3!", wynik);
     }
     return 0;
 }
