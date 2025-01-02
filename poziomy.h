@@ -9,4 +9,5 @@ void wypisz_tablice(int x, int y);
 void odkrywanie(int sizex, int sizey, int x, int y);
 int gra (int sizex, int sizey, int mines); //trzeba dodac informacje o usuwaniu flagi
 void wypisz_miny(int x, int y);
+void gra2(char *filename);
 #endif
