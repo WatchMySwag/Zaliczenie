@@ -185,7 +185,7 @@ void gra2(char *filename) {
         board[i] = (char *)malloc(sizey * sizeof(char));
     }
     for (int i = 0; i < sizex; i++) {
-        for (int j = 0; j < sizey; j++) {
+        for (int j = 0; j < sizey; j++) { //zusammen machen
             fscanf(file, " %c", &mines[i][j]);
             board[i][j]='-';
             if(mines[i][j]=='*') {
@@ -222,6 +222,7 @@ void gra2(char *filename) {
         }
         // lose
         if (x >= 0 && x < sizex && y >= 0 && y < sizey) {
+           // printf("%d %d\n",x,y);
             if (mines[x][y] == '*') {
                 printf("Trafiles na mine! Koniec gry.\n");
                 wypisz_miny(sizex,sizey);

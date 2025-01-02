@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
             case 'l':
                 poziom = atoi(optarg);
                 if (poziom < 1 || poziom > 4) {
-                    printf("Blad: Poziom trudnosci musi byc od 1 do 3.\n");
+                    printf("Blad: Poziom trudnosci musi byc od 1 do 4.\n");
                     return 1;
                 }
                 break;
