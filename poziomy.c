@@ -93,7 +93,6 @@ void wypisz_miny(int x, int y) {
         printf("\n");
     }
 }
-
 int gra(int sizex, int sizey, int mines_count) {
     int wynik = 0;
     int maks_odsloniete = (sizex * sizey) - mines_count;
@@ -172,6 +171,76 @@ int gra(int sizex, int sizey, int mines_count) {
         }
     }
     return wynik;
+}
+void gra2(char *filename) {
+    int sizex;
+    int sizey;
+    int mines_count=0;;
+    FILE *file = fopen(filename, "r");
+    fscanf(file, "%d %d", &sizex, &sizey);
+    board = (char **)malloc(sizex * sizeof(char *));
+    mines = (char **)malloc(sizex * sizeof(char *));
+    for (int i = 0; i < sizex; i++) {
+        mines[i] = (char *)malloc(sizey * sizeof(char));
+        board[i] = (char *)malloc(sizey * sizeof(char));
+    }
+    for (int i = 0; i < sizex; i++) {
+        for (int j = 0; j < sizey; j++) {
+            fscanf(file, " %c", &mines[i][j]);
+            board[i][j]='-';
+            if(mines[i][j]=='*') {
+                mines_count++;
+            }
+        }
+    }
+    int maks_odsloniete = (sizex * sizey) - mines_count;
+    int x, y;
+    int przegrana=0;
+    int poprawne_ruchy=0;
+    int tmp;
+    while (1) {
+        int odkryte_pola = 0;
+        for (int i = 0; i < sizex; i++) {
+            for (int j = 0; j < sizey; j++) {
+                if (board[i][j] != '-') {
+                    odkryte_pola++;
+                }
+            }
+        }
+        // Sprawdzenie warunku wygranej
+        if (odkryte_pola == maks_odsloniete) {
+            printf("Gratulacje! Wygrales!\n");
+            wypisz_tablice(sizex, sizey);
+            printf("Liczba poprawnych ruchow: %d\n", poprawne_ruchy);
+            printf("Liczba odkrytych pol: %d\n", odkryte_pola);
+            break;
+        }
+        //wczytania z pliku + wywalenie jesli nie ma juz nic a gra niezakonczona
+        if (fscanf(file, "%d %d", &x, &y) != 2) {
+            printf("Brak kolejnych ruchow w pliku. Gra zakonczona.\n");
+            break;
+        }
+        // lose
+        if (x >= 0 && x < sizex && y >= 0 && y < sizey) {
+            if (mines[x][y] == '*') {
+                printf("Trafiles na mine! Koniec gry.\n");
+                wypisz_miny(sizex,sizey);
+                printf("Liczba poprawnych ruchow: %d\n", poprawne_ruchy);
+                printf("Liczba odkrytych pol: %d\n", odkryte_pola);
+                przegrana = 1;
+                break;
+            }
+            odkrywanie(sizex, sizey, x, y);
+            poprawne_ruchy++;
+        } else {
+            printf("Nieprawidlowe wspolrzedne: %d %d\n", x, y); //wylapanie zlej
+        }
+        tmp = odkryte_pola;
+    }
+    if (przegrana == 0 && tmp== sizey*sizex-mines_count ) { //wygrana
+        printf("Wygrales! Liczba poprawnych ruchow: %d\n", poprawne_ruchy);
+        printf("Liczba odkrytych pol: %d\n", maks_odsloniete);
+    }
 }
 
 

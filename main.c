@@ -7,6 +7,7 @@
 #include <string.h>
 #include <getopt.h>
 int main(int argc, char *argv[]) {
+    char *plik = NULL;
     FILE *file = fopen("wyniki.txt", "r");
     if(file == NULL) {
         tworzenie();
@@ -15,7 +16,7 @@ int main(int argc, char *argv[]) {
     srand(time(NULL));
     int opt;
     int poziom = 0;
-    while ((opt = getopt(argc, argv, "l:")) != -1) {
+    while ((opt = getopt(argc, argv, "l:f:")) != -1) {
         switch (opt) {
             case 'l':
                 poziom = atoi(optarg);
@@ -24,12 +25,18 @@ int main(int argc, char *argv[]) {
                     return 1;
                 }
                 break;
+            case 'f':
+                plik = optarg;
+            break;
             case '?':
                 printf("Nieznana opcja: -%c\n", optopt);
                 return 1;
         }
     }
-
+    if(plik!=NULL) {
+        gra2(plik);
+        return 0;
+    }
     if (poziom == 0) {
         printf("Uzycie: %s -l [1-4]\n", argv[0]);
         printf("  -l  Wybor poziomu trudnosci (1: latwy, 2: sredni, 3: trudny, 4: wlasna mapa)\n");
