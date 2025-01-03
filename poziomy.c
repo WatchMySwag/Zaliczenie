@@ -113,7 +113,7 @@ int gra(int sizex, int sizey, int mines_count) {
         }
     }
     miny(sizex, sizey, mines_count, x, y);
-   //wypisz_miny(sizex, sizey);
+  // wypisz_miny(sizex, sizey);
 
     odkrywanie(sizex, sizey, x, y);
 
