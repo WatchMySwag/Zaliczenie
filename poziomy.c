@@ -231,9 +231,15 @@ void gra2(char *filename) {
                 przegrana = 1;
                 break;
             }
+            if(board[x][y]!='-'){
+                printf("Pole o wspolrzednych %d %d jest juz odkryte.\n",x,y);
+                poprawne_ruchy--;
+            }
             odkrywanie(sizex, sizey, x, y);
             poprawne_ruchy++;
-        } else {
+
+        }
+        else {
             printf("Nieprawidlowe wspolrzedne: %d %d\n", x, y); //wylapanie zlej
         }
         tmp = odkryte_pola;
