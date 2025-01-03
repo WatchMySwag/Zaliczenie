@@ -40,6 +40,7 @@ int main(int argc, char *argv[]) {
     if (poziom == 0) {
         printf("Uzycie: %s -l [1-4]\n", argv[0]);
         printf("  -l  Wybor poziomu trudnosci (1: latwy, 2: sredni, 3: trudny, 4: wlasna mapa)\n");
+        printf("Uzycie: %s -f [nazwa pliku tekstowego]\n", argv[0]);
         return 1;
     }
 
