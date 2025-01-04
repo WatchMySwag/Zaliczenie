@@ -27,6 +27,11 @@ int main(int argc, char *argv[]) {
                 break;
             case 'f':
                 plik = optarg;
+                FILE *testing = fopen(plik,"r");
+                if(testing == NULL) {
+                    printf("Plik nie istnieje");
+                    return 0;
+                }
             break;
             case '?':
                 printf("Nieznana opcja: -%c\n", optopt);
